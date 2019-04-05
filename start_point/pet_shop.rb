@@ -25,11 +25,18 @@ end
 
 
 def stock_count(business)
-  pets = business[:pets]
-  pet_stock_count = 0
+  return business[:pets].length
+end
+
+
+def pets_by_breed(business, dog_breed)
+dog_breed_total = []
+pets = business[:pets]
 
   for pet in pets
-    pet_stock_count += 1
+      if pet[:breed] == dog_breed
+      dog_breed_total.push(dog_breed)
+      end
   end
-  return pet_stock_count
+  return dog_breed_total
 end
