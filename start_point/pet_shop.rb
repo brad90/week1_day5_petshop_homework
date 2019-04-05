@@ -22,3 +22,14 @@ end
 def increase_pets_sold(business,pets_sold)
   business[:admin][:pets_sold] += pets_sold
 end
+
+
+def stock_count(business)
+  pets = business[:pets]
+  pet_stock_count = 0
+
+  for pet in pets
+    pet_stock_count += 1
+  end
+  return pet_stock_count
+end
