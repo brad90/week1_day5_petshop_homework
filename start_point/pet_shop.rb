@@ -34,9 +34,38 @@ dog_breed_total = []
 pets = business[:pets]
 
   for pet in pets
-      if pet[:breed] == dog_breed
-      dog_breed_total.push(dog_breed)
-      end
+      dog_breed_total.push(dog_breed) if pet[:breed] == dog_breed
   end
   return dog_breed_total
+end
+
+
+
+def find_pet_by_name(business, pet_name)
+  pets = business[:pets]
+  for pet in pets
+    return pet if pet[:name] == pet_name
+  end
+end
+
+
+def remove_pet_by_name(business, pet_name)
+  pets = business[:pets]
+  for pet in pets
+    pets.delete(pet) if pet[:name] == pet_name
+  end
+end
+
+def customer_cash(customer)
+  return customer[:cash]
+end
+
+def remove_customer_cash(customer, monies_to_be_removed)
+  return customer[:cash] -= monies_to_be_removed
+end
+
+def customer_pet_count (customer)
+  number_of_pets = customer[:pets].length()
+  return 0 if number_of_pets == nil
+  return number_of_pets
 end
