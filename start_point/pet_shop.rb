@@ -79,6 +79,7 @@ def customer_pet_count (customer)
   number_of_pets = customer[:pets].length()
   return 0 if number_of_pets == nil
   return number_of_pets
+
 end
 
 def add_pet_to_customer (customer, new_customer_pet)
@@ -95,11 +96,17 @@ def customer_can_afford_pet(customer,pet_name)
    return false
 end
 
-def sell_pet_to_customer (business, pet_search, customer)
-  customer_new_pet_added = customer[:pets] << pet_search.length()
-  business[:admin][:pets_sold] += 1
-  customer_new_cash_after_purchase = customer[:cash]-pet_search[:price]
-  p customer_new_cash_after_purchase
-  new_total_cash_business = business[:admin][:total_cash] + pet_search[:price]
-  p new_total_cash_business
+def sell_pet_to_customer(business, pet_search, customer)
+
+  if pet_search != nil && customer[:cash] >= pet_search[:price]
+    customer_new_pet_added = customer[:pets].push(pet_search)
+    p customer_new_pet_added.length()
+    stock_total_increase_by_1 = business[:admin][:pets_sold] += 1
+    p stock_total_increase_by_1
+    customer_new_cash_after_purchase = customer[:cash]-pet_search[:price]
+    p customer_new_cash_after_purchase
+    new_total_cash_business = business[:admin][:total_cash] + pet_search[:price]
+    p new_total_cash_business
+  end
+
 end
