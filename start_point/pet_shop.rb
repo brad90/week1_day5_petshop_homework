@@ -18,7 +18,7 @@ def pets_sold(business)
   return business[:admin][:pets_sold]
 end
 
-
+#
 def increase_pets_sold(business,pets_sold)
   business[:admin][:pets_sold] += pets_sold
 end
@@ -46,6 +46,7 @@ def find_pet_by_name(business, pet_name)
   for pet in pets
     return pet if pet[:name] == pet_name
   end
+  return nil
 end
 
 
@@ -54,6 +55,16 @@ def remove_pet_by_name(business, pet_name)
   for pet in pets
     pets.delete(pet) if pet[:name] == pet_name
   end
+end
+
+
+
+def add_pet_to_stock(business, name)
+stock = business[:pets]<< name
+end
+
+def stock_count(business)
+  return business[:pets].length()
 end
 
 def customer_cash(customer)
@@ -68,4 +79,27 @@ def customer_pet_count (customer)
   number_of_pets = customer[:pets].length()
   return 0 if number_of_pets == nil
   return number_of_pets
+end
+
+def add_pet_to_customer (customer, new_customer_pet)
+  customer[:pets]<<new_customer_pet
+end
+
+
+#######################optional tests####################################
+
+def customer_can_afford_pet(customer,pet_name)
+  customer_cash = customer[:cash]
+  new_pet_cost = pet_name[:price]
+   return true if customer_cash > new_pet_cost
+   return false
+end
+
+def sell_pet_to_customer (business, pet_search, customer)
+  customer_new_pet_added = customer[:pets] << pet_search.length()
+  business[:admin][:pets_sold] += 1
+  customer_new_cash_after_purchase = customer[:cash]-pet_search[:price]
+  p customer_new_cash_after_purchase
+  new_total_cash_business = business[:admin][:total_cash] + pet_search[:price]
+  p new_total_cash_business
 end
